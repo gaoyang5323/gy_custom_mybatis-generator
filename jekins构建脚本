@@ -1,0 +1,99 @@
+
+#!/bin/bash
+git fetch --all
+git reset --hard origin/master
+mvn clean package
+
+echo '复制war到服务器开始---------------------------------------------------------'
+cd target
+scp wfcm-api.war root@39.105.204.225:/opt
+echo '复制war到服务器结束---------------------------------------------------------'
+ssh -t -t root@39.105.204.225 > /dev/null 2>&1 << eeooff
+
+echo '' > /usr/local/crontab/restart_tomcat/all_check.sh
+
+echo '关闭服务器---------------------------------------------------------'
+ps -ef | grep -v grep | grep tomcat-1  | awk '{print $2}' | xargs kill -9
+ps -ef | grep -v grep | grep tomcat-2  | awk '{print $2}' | xargs kill -9
+ps -ef | grep -v grep | grep tomcat-3  | awk '{print $2}' | xargs kill -9
+sleep 1s
+rm -rf /opt/tomcat/tomcat-1/logs/*
+rm -rf /opt/tomcat/tomcat-2/logs/*
+rm -rf /opt/tomcat/tomcat-3/logs/*
+cd /opt/tomcat/tomcat-1/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+cd /opt/tomcat/tomcat-2/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+cd /opt/tomcat/tomcat-3/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+rm -f /opt/wfcm-api.war
+
+echo '重启服务器---------------------------------------------------------'
+/opt/tomcat/tomcat-1/bin/startup.sh
+/opt/tomcat/tomcat-2/bin/startup.sh
+/opt/tomcat/tomcat-3/bin/startup.sh
+
+
+cat > /usr/local/crontab/restart_tomcat/all_check.sh<< EOF
+#!/bin/sh
+. /etc/profile
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-1
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-2
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-3
+EOF
+
+exit
+eeooff
+
+////////////////////////////255
+#!/bin/bash
+git fetch --all
+git reset --hard origin/master
+mvn clean package
+
+cd target
+
+echo '复制war到服务器开始---------------------------------------------------------'
+scp wfcm-api.war root@39.105.198.87:/opt
+echo '复制war到服务器结束---------------------------------------------------------'
+ssh -t -t root@39.105.198.87 > /dev/null 2>&1 << eeooff
+
+echo '' > /usr/local/crontab/restart_tomcat/all_check.sh
+
+echo '关闭服务器---------------------------------------------------------'
+ps -ef | grep -v grep | grep tomcat-1  | awk '{print $2}' | xargs kill -9
+ps -ef | grep -v grep | grep tomcat-2  | awk '{print $2}' | xargs kill -9
+ps -ef | grep -v grep | grep tomcat-3  | awk '{print $2}' | xargs kill -9
+sleep 2s
+rm -rf /opt/tomcat/tomcat-1/logs/*
+rm -rf /opt/tomcat/tomcat-2/logs/*
+rm -rf /opt/tomcat/tomcat-3/logs/*
+cd /opt/tomcat/tomcat-1/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+cd /opt/tomcat/tomcat-2/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+cd /opt/tomcat/tomcat-3/webapps/
+rm -rf *
+cp /opt/wfcm-api.war ./
+rm -f /opt/wfcm-api.war
+
+echo '重启服务器---------------------------------------------------------'
+/opt/tomcat/tomcat-1/bin/startup.sh
+/opt/tomcat/tomcat-2/bin/startup.sh
+/opt/tomcat/tomcat-3/bin/startup.sh
+
+cat > /usr/local/crontab/restart_tomcat/all_check.sh<< EOF
+#!/bin/sh
+. /etc/profile
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-1
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-2
+/usr/local/crontab/restart_tomcat/check_tomcat.sh tomcat-3
+EOF
+
+exit
+eeooff

@@ -1,0 +1,7 @@
+mvn install:install-file -Dfile=aes-jre1.6.jar -DgroupId=com.qq.weixin.mp.aes -DartifactId=aes-jre -Dversion=1.6 -Dpackaging=jar
+
+mvn install:install-file -Dfile=rest-2.6.3.jar -DgroupId=com.cloopen -DartifactId=rest -Dversion=2.6.3 -Dpackaging=jar
+
+mvn install:install-file -Dfile=pili-sdk-java-v2.jar -DgroupId=com.qiniu.pli -DartifactId=pili-sdk-java-v2 -Dversion=2.1.0 -Dpackaging=jar
+
+
