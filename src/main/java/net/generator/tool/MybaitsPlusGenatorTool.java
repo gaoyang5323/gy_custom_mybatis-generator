@@ -1,4 +1,4 @@
-package net.example.mybatisgenerator.tool;
+package net.generator.tool;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
@@ -63,9 +63,9 @@ public class MybaitsPlusGenatorTool {
     private static String PARENT_PACKAGE_PATH = "/com/wfcm";
 
     // 各层包名
-   // private static String ENTITY_PATH = "/entity/";
-   // private static String XML_PATH = "/resources/mapper/";
-   // private static String MAPPER_PATH = "/dao/";
+    // private static String ENTITY_PATH = "/entity/";
+    // private static String XML_PATH = "/resources/mapper/";
+    // private static String MAPPER_PATH = "/dao/";
     private static String ENTITY_PATHVO = "/vo/";
     private static String SERVICE_PATH = "/service/";
     private static String SERVICE_IMPL_PATH = "/service/impl/";
@@ -75,9 +75,9 @@ public class MybaitsPlusGenatorTool {
     // 数据库
     private static String driverClassName = "com.mysql.cj.jdbc.Driver";
     private static DbType DB_TYPE = DbType.MYSQL;
-    private static String url = "jdbc:mysql://pc-2zeth884p64r5rbamo.mysql.polardb.rds.aliyuncs.com/wf_course_v3?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull";
-    private static String username = "wf_course_v3";
-    private static String password = "QzPIlslh4ql4KRS02qZu2paXaUqDHm";
+    private static String url;
+    private static String username;
+    private static String password;
 
 
     // 自定义输出模板和位置
@@ -97,7 +97,7 @@ public class MybaitsPlusGenatorTool {
      * mapper.xml输出模板
      */
     private static String XML_TEMPLATE = "templates/mapper.xml.ftl";
-  //  private static String XML_OUTPUT_PATH = DAO_OUTPUT_MODULE + "/src/main" + XML_OUTPUT_MODULE + XML_PATH;
+    //  private static String XML_OUTPUT_PATH = DAO_OUTPUT_MODULE + "/src/main" + XML_OUTPUT_MODULE + XML_PATH;
     private static String XML_OUTPUT_PATH = DAO_OUTPUT_MODULE + "/src/main/java" + PARENT_PACKAGE_PATH + DAO_OUTPUT_MODULE + XML_PATH;
 
 
@@ -123,7 +123,15 @@ public class MybaitsPlusGenatorTool {
     private static String CONTROLLER_OUTPUT_PATH = Controller_OUTPUT_MODULE + "/src/main/java" + PARENT_PACKAGE_PATH + Controller_OUTPUT_MODULE + CONTROLLER_PATH;
 
 
-    public static void generator(String[] tables) {
+    public static void generator(String url, String username, String password, String packagePath, String[] tables) {
+        MybaitsPlusGenatorTool.url = url;
+        MybaitsPlusGenatorTool.username = username;
+        MybaitsPlusGenatorTool.password = password;
+        if (!packagePath.trim().equals("")) {
+            MAPPER_AND_XML_PATH = MAPPER_AND_XML_PATH + packagePath + "/";
+            ENTITY_PATH = ENTITY_PATH + packagePath + "/";
+        }
+
         if (tables.length < 1) {
             System.err.println("请输入表名");
             return;
@@ -178,7 +186,7 @@ public class MybaitsPlusGenatorTool {
                 // XML ColumnList: mapper.xml生成查询结果列
                 .setBaseColumnList(true)
                 // swagger注解; 须添加swagger依赖
-                .setSwagger2(false)
+                .setSwagger2(true)
                 // 作者
                 .setAuthor(AUTHOR);
         // 设置实体类名称
