@@ -37,7 +37,7 @@
     </sql>
 </#if>
 
-    <insert id="insert" parameterType="${package.Entity}.${entity}">
+    <insert id="insert" useGeneratedKeys = "true" keyProperty = "id" parameterType="${package.Entity}.${entity}">
         INSERT INTO ${table.name} (${table.fieldNames})
         values (
         <#list table.fields as field>
@@ -56,7 +56,7 @@
         )
     </insert>
 
-    <insert id="insertBatchs" parameterType="java.util.List">
+    <insert id="insertBatchs" useGeneratedKeys = "true" keyProperty = "id" parameterType="java.util.List">
         INSERT INTO ${table.name} (${table.fieldNames})
         values
         <foreach collection="list" item="item" separator=",">
@@ -78,7 +78,7 @@
         </foreach>
     </insert>
 
-    <insert id="insertSelective" parameterType="${package.Entity}.${entity}">
+    <insert id="insertSelective" useGeneratedKeys = "true" keyProperty = "id" parameterType="${package.Entity}.${entity}">
         INSERT INTO ${table.name}
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <#list table.fields as field>
