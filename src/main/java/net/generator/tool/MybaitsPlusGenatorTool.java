@@ -130,6 +130,9 @@ public class MybaitsPlusGenatorTool {
         if (!packagePath.trim().equals("")) {
             MAPPER_AND_XML_PATH = MAPPER_AND_XML_PATH + packagePath + "/";
             ENTITY_PATH = ENTITY_PATH + packagePath + "/";
+
+            XML_PATH = MAPPER_AND_XML_PATH;
+            MAPPER_PATH = MAPPER_AND_XML_PATH;
         }
 
         if (tables.length < 1) {
@@ -137,20 +140,6 @@ public class MybaitsPlusGenatorTool {
             return;
         }
         TABLES = tables;
-
-        // 全局配置
-        GlobalConfig globalConfig = globalConfig();
-        // 数据源配置
-        DataSourceConfig dataSourceConfig = dataSourceConfig();
-        // 策略配置
-        StrategyConfig strategyConfig = strategyConfig();
-        // 包配置
-        PackageConfig packageConfig = packageConfig();
-        // 模板配置
-        TemplateConfig templateConfig = templateConfig();
-        // 自定义配置
-        InjectionConfig injectionConfig = injectionConfig();
-
         // 执行
         new AutoGenerator()
                 // 全局配置

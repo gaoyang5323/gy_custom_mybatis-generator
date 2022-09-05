@@ -12,7 +12,7 @@
     <resultMap id="BaseResultMap" type="${package.Entity}.${entity}">
 <#list table.fields as field>
 <#if field.keyFlag><#--生成主键排在第一位-->
-    <id column="${field.name}" property="${field.propertyName}" jdbcType="<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>" />
+    <id column="${field.name}" property="${field.propertyName}" jdbcType="<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>" />
 </#if>
 </#list>
 <#list table.commonFields as field><#--生成公共字段 -->
@@ -20,7 +20,7 @@
 </#list>
 <#list table.fields as field>
 <#if !field.keyFlag><#--生成普通字段 -->
-    <result column="${field.name}" property="${field.propertyName}" jdbcType="<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>" />
+    <result column="${field.name}" property="${field.propertyName}" jdbcType="<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>" />
 </#if>
 </#list>
     </resultMap>
@@ -42,15 +42,15 @@
         values (
         <#list table.fields as field>
             <#if field.keyFlag>
-                <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},</#if>
+                <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},</#if>
             </#if>
         </#list>
         <#list table.commonFields as field><#--生成公共字段 -->
-            <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},</#if>
+            <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},</#if>
         </#list>
         <#list table.fields as field>
             <#if !field.keyFlag><#--生成普通字段 -->
-                <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#sep>,</#if>
+                <#if field?size-21 == field_index>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#sep>,</#if>
             </#if>
         </#list>
         )
@@ -63,15 +63,15 @@
             (
             <#list table.fields as field>
                 <#if field.keyFlag>
-                    <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},</#if>
+                    <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},</#if>
                 </#if>
             </#list>
             <#list table.commonFields as field><#--生成公共字段 -->
-                <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},</#if>
+                <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},</#if>
             </#list>
             <#list table.fields as field>
                 <#if !field.keyFlag><#--生成普通字段 -->
-                    <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#sep>,</#if>
+                    <#if field?size-21 == field_index>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#sep>,</#if>
                 </#if>
             </#list>
             )
@@ -105,19 +105,19 @@
             <#list table.fields as field>
                 <#if field.keyFlag>
                 <if test="${field.propertyName} != null">
-                     ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                     ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
                 </#if>
             </#list>
             <#list table.commonFields as field><#--生成公共字段 -->
                 <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                    ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                    ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
             </#list>
             <#list table.fields as field>
                 <#if !field.keyFlag><#--生成普通字段 -->
                 <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                    ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                    ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
                 </#if>
             </#list>
@@ -126,7 +126,7 @@
 
     <delete id="deleteById">
         DELETE FROM ${table.name}
-        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if></#list>
+        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if></#list>
     </delete>
 
     <delete id="deleteByIdList" parameterType="java.util.List">
@@ -142,24 +142,24 @@
             <#--<#list table.fields as field>
                 <#if field.keyFlag>
                     <if test="${field.propertyName} != null">
-                        ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                        ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                     </if>
                 </#if>
             </#list>-->
             <#list table.commonFields as field><#--生成公共字段 -->
                 <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                    ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                    ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
             </#list>
             <#list table.fields as field>
                 <#if !field.keyFlag><#--生成普通字段 -->
                     <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                        ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                        ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                     </if>
                 </#if>
             </#list>
         </set>
-        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if></#list>
+        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if></#list>
     </update>
 
     <update id="updateById" parameterType="${package.Entity}.${entity}">
@@ -167,18 +167,18 @@
         SET
         <#--<#list table.fields as field>
             <#if field.keyFlag>
-              ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+              ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
             </#if>
         </#list>-->
         <#list table.commonFields as field><#--生成公共字段 -->
-            <#if field?size-21 == field_index>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},</#if>
+            <#if field?size-21 == field_index>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},</#if>
         </#list>
         <#list table.fields as field>
           <#if !field.keyFlag><#--生成普通字段 -->
-              <#if field?size-21 == field_index>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#else>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}<#sep>,</#if>
+              <#if field?size-21 == field_index>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#else>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}<#sep>,</#if>
           </#if>
         </#list>
-        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if></#list>
+        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if></#list>
     </update>
 
     <update id="updateByIdSelectiveBatchs" parameterType="java.util.List">
@@ -187,18 +187,18 @@
             <set>
               <#list table.commonFields as field><#--生成公共字段 -->
                 <if test="item.${field.propertyName} != null <#if field.columnType == "STRING">and item.${field.propertyName}!=''</#if>">
-                  ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                  ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
               </#list>
               <#list table.fields as field>
                 <#if !field.keyFlag><#--生成普通字段 -->
                 <if test="item.${field.propertyName} != null <#if field.columnType == "STRING">and item.${field.propertyName}!=''</#if>">
-                  ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},
+                  ${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},
                 </if>
                 </#if>
               </#list>
             </set>
-            WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if></#list>
+            WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{item.${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if></#list>
         </foreach>
     </update>
 
@@ -207,7 +207,7 @@
         SELECT
         <include refid="Base_Column_List" />
         FROM ${table.name}
-        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if></#list>
+        WHERE <#list table.fields as field><#if field.keyFlag>${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if></#list>
     </select>
 
     <select id="get${entity}ListByPage"  resultMap="BaseResultMap">
@@ -247,20 +247,20 @@
         <#list table.fields as field>
             <#if field.keyFlag>
                 <if test="${field.propertyName} != null">
-                    AND  ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}
+                    AND  ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}
                 </if>
             </#if>
         </#list>
         <#list table.commonFields as field><#--生成公共字段 -->
             <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                AND  ${field.name}<#if field.propertyName?contains("Name")> like concat('%',${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},'%') <#else> = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if>
-                <#--AND  ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}-->
+                AND  ${field.name}<#if field.propertyName?contains("Name")> like concat('%',${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},'%') <#else> = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if>
+                <#--AND  ${field.name} = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}-->
             </if>
         </#list>
         <#list table.fields as field>
             <#if !field.keyFlag><#--生成普通字段 -->
                 <if test="${field.propertyName} != null <#if field.columnType == "STRING">and ${field.propertyName}!=''</#if>">
-                    AND  ${field.name}<#if field.propertyName?contains("Name")> like concat('%',${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>},'%') <#else> = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#else>${field.columnType}</#if>}</#if>
+                    AND  ${field.name}<#if field.propertyName?contains("Name")> like concat('%',${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>},'%') <#else> = ${r"#"}{${field.propertyName},jdbcType=<#if field.columnType == "STRING">VARCHAR<#elseif field.columnType == "LOCAL_DATE_TIME">TIMESTAMP<#elseif field.columnType == "BIG_DECIMAL">DECIMAL<#elseif field.columnType == "FLOAT">REAL<#elseif field.columnType == "LONG">BIGINT<#else>${field.columnType}</#if>}</#if>
                 </if>
             </#if>
         </#list>

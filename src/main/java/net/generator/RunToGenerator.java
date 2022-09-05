@@ -36,8 +36,8 @@ public class RunToGenerator {
     //课程
     @Test
     public void course() {
-        String[] tables = {"wf_score_compute_expire_job"};
-        String packagePath = "score";
+        String[] tables = {"wf_study_time_job"};
+        String packagePath = "filePreview";
         MybaitsPlusGenatorTool.generator(url, username, password, packagePath, tables);
     }
 
